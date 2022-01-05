@@ -4,13 +4,13 @@ Find all the popular and new tweaks and themes you need to spice up your Iphone 
 
 # Compatibility 
 
-FreshCydia works for all Ios versions. 
+FreshCydia works for all Ios versions!
 
 
 # Credits 
 
-@t0mi292 - Tweak Creator
-@DaanDH13 - Site Creator
-@BluDood - Site Creator
+@t0mi292 - Tweak Creator <br>
+@DaanDH13 - Site Creator <br>
+@BluDood - Site Creator <br>
 
 
