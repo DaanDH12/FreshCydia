@@ -5,7 +5,7 @@
 */
 
 // API address
-var api = "http://127.0.0.1:8080/parcility"
+var api = "http://192.168.0.107:8080/parcility"
 
 /*
 *   Getting Data
@@ -17,7 +17,7 @@ async function getData() {
     const featuredArr = (await featured).featured.slice(0, 5)
     document.querySelector(".featured").innerHTML = ''
     featuredArr.forEach(element => {
-        addFeatured(element.name, element.icon, element.banner)
+        addFeatured(element.name, element.icon, element.banner, element.repo, element.id)
     })
 
     // Get popular repos from the API
@@ -33,11 +33,11 @@ async function getData() {
 getData()
 
 // Add featured packages to the page
-async function addFeatured(name, icon, banner) {
+async function addFeatured(name, icon, banner, repo, id) {
     const card = document.createElement('div')
     card.classList.add("card")
     card.style.backgroundImage = `url(${banner})`
-    card.innerHTML = ` <div class="filler"></div> <div class="install"> <img src="${icon}" alt="Icon for package ${name}"> <h3 class="title">${name}</h3> <div class="filler"></div> <a href="#" class="get"> <span>GET</span> </a> </div>`
+    card.innerHTML = ` <div class="filler"></div> <div class="install"> <img src="${icon}" alt="Icon for package ${name}"> <h3 class="title">${name}</h3> <div class="filler"></div> <a href="cydia://package/${id}" class="get"> <span>GET</span> </a> </div>`
     document.querySelector(".featured").append(card)
 }
 
@@ -69,3 +69,26 @@ document.querySelector('.notification').addEventListener('click', function (even
     }
 })
 */
+
+function repoPrompt(name, reponame, repo) {
+    iOSalert("add", `Add ${reponame} to install ${name}!`, ``)
+}
+
+function iOSalert(option, title, content) {
+    if (option === 'add') {
+        const notification = document.createElement('div')
+        notification.classList.add('notification')
+        notification.id = "notification"
+        notification.innerHTML = `<div class="inner"> <h2 class="title">${title}</h2> <span class="content">${content}</span> <div class="filler"></div> <div class="actions"> <a href="" onclick="iOSalert('remove', 'Hello', 'testing'); return false" class="default">OK</a> </div> </div>`
+        document.body.append(notification)
+        setTimeout(() => {
+            document.getElementById('notification').classList.add('shown')
+        }, 50);
+    } else {
+        document.getElementById('notification').remove()
+    }
+}
+
+var now = new Date()
+
+var date = today.getMonth + today.getDay

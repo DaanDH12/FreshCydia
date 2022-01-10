@@ -21,6 +21,7 @@ async function gatherData() {
             "name": e.Name,
             "icon": e.Icon,
             "repo": e.repo.url,
+            "id": e.Package,
             "banner": sileo.data.headerImage
         })
     });
