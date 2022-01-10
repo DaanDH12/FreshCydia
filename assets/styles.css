@@ -4,6 +4,18 @@
 *   Now you know who to blame if you hate the code ;)
 */
 
+@font-face {
+    font-family: SF-Pro;
+    font-weight: 500;
+    src: url(./font/SFPro/Regular.otf);
+}
+
+@font-face {
+    font-family: SF-Pro;
+    src: url(./font/SFPro/Semibold.otf);
+    font-weight: 700;
+}
+
 :root {
     --bg: #eeeeee;
     --bg-secondary: #fff;
@@ -13,7 +25,7 @@
 }
 
 body {
-    font-family: sans-serif;
+    font-family: SF-Pro, sans-serif;
     background: var(--bg);
     color: var(--text);
     margin: 50px 20px;
@@ -84,17 +96,26 @@ span .name {
 
 .notification .title {
     padding-top: 5px;
+    font-size: 22px;
+    line-height: 18px;
+    font-weight: 700;
 }
 
 .notification .actions {
     margin-top: 20px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.notification a {
+    padding: 12px 0;
     border-top: solid 1pt rgba(0, 0, 0, 0.1);
-    font-size: 20px;
-    padding: 15px;
 }
 
 .notification .actions .default {
     color: #0064FF;
+    font-weight: 700;
 }
 
 .header {
@@ -186,4 +207,14 @@ span .name {
 
 .filler {
     flex-grow: 1;
+}
+
+a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: #0064FF;
+}
+
+.footer {
+    padding: 20px 0;
+    text-align: center;
 }
