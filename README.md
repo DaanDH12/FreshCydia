@@ -38,7 +38,7 @@ I'm using Live Server in VSCode.
 
 Install Live Server from the VSCode Marketplace
 
-<video src='live-server.mp4' width=180 />
+<video src='live-server.mp4' width=180></video>
 
 Open the Command Palette
 ```
