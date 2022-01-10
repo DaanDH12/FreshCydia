@@ -5,7 +5,7 @@
 */
 
 // API address
-var api = "http://192.168.0.107:8080/parcility"
+var api = "https://FreshCydiaAPI.bludood.repl.co/parcility"
 
 /*
 *   Getting Data
