@@ -94,6 +94,20 @@ async function getTweak(url, id) {
     }, 1000);
 }
 
+async function showDebug() {
+    var section = document.querySelector('.debug')
+    var agentSection = document.querySelector('.debug-useragent')
+    var errorSection = document.querySelector('.debug-errors')
+    agentSection.innerHTML = navigator.userAgent
+    errorSection.innerHTML = errors
+    
+    if (section.style.display === 'none') {
+        section.style.display = 'block'
+    } else [
+        section.style.display = 'none'
+    ]
+}
+
 // Set the date for the header
 var now = new Date()
 
@@ -104,3 +118,10 @@ var date = now.toLocaleDateString('en-us', {
 })
 
 document.querySelector('.h-date').innerText = date
+
+// Display errors in the debug element
+var errors = []
+window.onerror = function (msg, source, lineNo, columnNo, error) {
+    errors.push(msg)
+    return false;
+}
