@@ -98,8 +98,10 @@ async function showDebug() {
     var section = document.querySelector('.debug')
     var agentSection = document.querySelector('.debug-useragent')
     var errorSection = document.querySelector('.debug-errors')
-    agentSection.innerHTML = navigator.userAgent
-    errorSection.innerHTML = errors
+    var headerSection = document.querySelector('.debug-headers')
+    agentSection.innerText = navigator.userAgent
+    errorSection.innerText = errors
+    headerSection.innerText = headers
     
     if (section.style.display === 'none') {
         section.style.display = 'block'
@@ -125,3 +127,9 @@ window.onerror = function (msg, source, lineNo, columnNo, error) {
     errors.push(msg)
     return false;
 }
+
+var headers = []
+var req = new XMLHttpRequest();
+req.open('GET', document.location, false);
+req.send(null);
+headers.push(req.getAllResponseHeaders())
