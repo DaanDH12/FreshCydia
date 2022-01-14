@@ -6,49 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FreshCydia</title>
     <link rel="stylesheet" href="assets/styles.css">
+    <script src="assets/pulltorefresh.min.js" defer></script>
     <script src="assets/index.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 
 <body>
-    <div class="testing"></div>
-    <div class="header">
-        <h3 class="h-date"></h3>
-        <img src="assets/icon.png" alt="Cydia Icon">
-        <h1 class="h-title">Cydia</h1>
-    </div>
-    <div class="packages">
-        <h2>Featured Packages</h2>
-        <div class="featured">
-            <div>
-                <svg class="loader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50px" height="50px" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" fill="none" stroke="#0064ff" stroke-width="9" r="35" stroke-dasharray="164.93361431346415 56.97787143782138"></circle>
-                </svg>
-                <span class="loader">Loading...</span>
+    <div class="content">
+        <div class="header">
+            <h3 class="h-date"></h3>
+            <img class="t-icon" src="assets/icon.png" alt="Cydia Icon">
+            <h1 class="t-cydia">Cydia</h1>
+        </div>
+        <div class="packages">
+            <h2 class="t-featured">Featured Packages</h2>
+            <div class="featured">
+                <div>
+                    <svg class="loader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50px" height="50px" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" fill="none" stroke="#0064ff" stroke-width="9" r="35" stroke-dasharray="164.93361431346415 56.97787143782138"></circle>
+                    </svg>
+                    <span class="loader t-loading">Loading...</span>
+                </div>
+            </div>
+            <h2 class="t-popular">Popular Repositories</h2>
+            <div class="popular">
+                <div class="loader">
+                    <svg class="loader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50px" height="50px" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" fill="none" stroke="#0064ff" stroke-width="9" r="35" stroke-dasharray="164.93361431346415 56.97787143782138"></circle>
+                    </svg>
+                    <span class="loader t-loading">Loading...</span>
+                </div>
             </div>
         </div>
-        <h2>Popular Repositories</h2>
-        <div class="popular">
-            <div class="loader">
-                <svg class="loader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50px" height="50px" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" fill="none" stroke="#0064ff" stroke-width="9" r="35" stroke-dasharray="164.93361431346415 56.97787143782138"></circle>
-                </svg>
-                <span class="loader">Loading...</span>
-            </div>
+        <div class="debug" style="display: none;">
+            <h3 class="t-useragent">User Agent</h3>
+            <code class="debug-useragent"></code>
+            <h3 class="t-headers">Headers</h3>
+            <code class="debug-headers"></code>
+            <h3 class="t-errors">Errors</h3>
+            <code class="debug-errors"></code>
         </div>
-    </div>
-    <div class="debug" style="display: none;">
-        <h3>User Agent</h3>
-        <code class="debug-useragent"></code>
-        <h3>Headers</h3>
-        <code class="debug-headers"></code>
-        <h3>Errors</h3>
-        <code class="debug-errors"></code>
-    </div>
-    <div class="footer">
-        <a href="javascript:showDebug()">Show debug information</a>
-        <br><br>
-        Made by <a href="https://bludood.com">BluDood</a>, <a href="https://github.com/DaanDH12">DaanDH12</a> & <a href="https://mobile.twitter.com/t0mi292">t0mi</a>
+        <div class="footer">
+            <a class="t-showdebug" href="javascript:showDebug()">Show debug information</a>
+            <br><br>
+            Made by <a href="https://bludood.com">BluDood</a>, <a href="https://github.com/DaanDH12">DaanDH12</a> & <a href="https://mobile.twitter.com/t0mi292">t0mi</a>
+        </div>
     </div>
 </body>
 

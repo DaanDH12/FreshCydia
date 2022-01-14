@@ -28,10 +28,14 @@ body {
     font-family: SF-Pro, sans-serif;
     background: var(--bg);
     color: var(--text);
-    margin: 50px 20px;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
+    margin: 0;
+}
+
+.content {
+    margin: 50px 20px;
 }
 
 .loader {
@@ -107,8 +111,9 @@ span .name {
 }
 
 .notification .content {
+    margin: 0;
     display: block;
-    padding: 0 10px;
+    padding: 0px 10px;
 }
 
 .notification .actions {

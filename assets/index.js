@@ -7,11 +7,13 @@
 // API address
 var api = "https://FreshCydiaAPI.bludood.repl.co/parcility"
 
-function setCookie() {
-    const current = new Date()
-    current.setDate(current.getDate() + 1)
-    document.cookie = `text=bludoo; expires=${current.toUTCString()}`;
-}
+// PullToRefresh https://www.boxfactura.com/pulltorefresh.js/
+PullToRefresh.init({
+    mainElement: 'body',
+    onRefresh() {
+      window.location.reload();
+    }
+});
 
 /*
 *   Getting Data
