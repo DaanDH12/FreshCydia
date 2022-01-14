@@ -7,6 +7,12 @@
 // API address
 var api = "https://FreshCydiaAPI.bludood.repl.co/parcility"
 
+function setCookie() {
+    const current = new Date()
+    current.setDate(current.getDate() + 1)
+    document.cookie = `text=bludoo; expires=${current.toUTCString()}`;
+}
+
 /*
 *   Getting Data
 */
@@ -45,7 +51,7 @@ async function addFeatured(name, icon, banner, repo, id) {
 async function addRepos(name, icon, repo) {
     const card = document.createElement('div')
     card.classList.add("card", "small")
-    card.innerHTML = `<div class="filler"></div> <div class="install"> <img src="${icon}" alt="Icon for repo ${name}"> <h3 class="title">${name}</h3> <div class="filler"></div> <a href="cydia://url/https://cydia.saurik.com/api/share#?source=${repo}" class="get"> <span>ADD</span> </a> </div>`
+    card.innerHTML = `<div class="filler"></div> <div class="install"> <img src="${icon}" alt="Icon for repo ${name}"> <h3 class="title">${name}</h3> <div class="filler"></div> <a href="cydia://url/https://cydia.saurik.com/api/share#?source=${repo}" target="_blank" class="get"> <span>ADD</span> </a> </div>`
     document.querySelector(".popular").append(card)
 }
 
@@ -54,7 +60,9 @@ function iOSalert(option, title, content, buttons) {
     if (option === 'add') {
         const btnArray = []
         buttons.forEach(item => {
-            btnArray.push(`<a href="${item.link}">${item.name}</a>`)
+            if (item.newtab) var newtab = ' target="_blank"'
+            if (item.onclick) var onclick = ` onclick="${item.onclick}"`
+            btnArray.push(`<a href="${item.link}"${newtab || ''}${onclick || ''}>${item.name}</a>`)
         });
         const notification = document.createElement('div')
         notification.classList.add('notification')
@@ -74,24 +82,50 @@ function iOSalert(option, title, content, buttons) {
 
 // Prompt for adding a repository when adding a tweak, using the iOSalert function
 async function repoPrompt(name, url, id) {
-    if (localStorage.getItem('directGet') === 'true') return window.location = `cydia://package/${id}`
-    iOSalert("add", 'Notice', `Add ${url} to install ${name}!`, [{
-        "name": "Add Repository and Open",
-        "link": `javascript:getTweak('${url}', '${id}')`
-    },
-    {
-        "name": "Do not show this again",
-        "link": "javascript:localStorage.setItem('directGet', 'true'); iOSalert('remove')"
-    }])
+    iOSalert("add", 'Notice', `Add ${url} to install ${name}!<br>If you already have this repository added, you can tap "Install Tweak".`, [
+        {
+            "name": "Add Repository",
+            "link": `cydia://url/https://cydia.saurik.com/api/share#?source=${url}`,
+            "newtab": true,
+            "onclick": `saveRepo('${url}', '${id}')`
+        },
+        {
+            "name": "Install Tweak",
+            "link": `cydia://package/${id}`,
+            "newtab": true
+        }
+    ])
 }
 
-// Add a repo and get a tweak
-async function getTweak(url, id) {
-    window.location = `cydia://url/https://cydia.saurik.com/api/share#?source=${url}`
-    setTimeout(() => {
-        window.location = `cydia://package/${id}`
-        iOSalert('remove')
-    }, 1000);
+// https://stackoverflow.com/a/69879862/17115986
+function getCookie(name) {
+    var cookieArr = document.cookie.split(";");
+    for (var i = 0; i < cookieArr.length; i++) {
+        var cookiePair = cookieArr[i].split("=");
+        if (name == cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+    return null;
+}
+// Since Cydia refreshes the home page after adding a tweak,
+// we need to set a temporary cookie to install the tweak after the refresh
+if (getCookie('cydia')) {
+    if (getCookie('cydia').split(',')[0] === 'addrepoTrue') {
+        iOSalert('add', 'Installing Tweak', 'You were installing a tweak! Please tap "Install Tweak" to finish installing.', [
+            {
+                "name": "Install Tweak",
+                "link": `cydia://package/${getCookie('cydia').split(',')[1]}`,
+                "newtab": true
+            }
+        ])
+        document.cookie = 'cydia=; expires=Thu, 01 Jan 1970 00:00:00 UTC;'
+    }
+}
+async function saveRepo(repo, id) {
+    const current = new Date()
+    current.setDate(current.getDate() + 1)
+    document.cookie = `cydia=addrepoTrue,${id}; expires=${current.toUTCString()}`;
 }
 
 async function showDebug() {
@@ -102,10 +136,10 @@ async function showDebug() {
     agentSection.innerText = navigator.userAgent
     errorSection.innerText = errors
     headerSection.innerText = headers
-    
+
     if (section.style.display === 'none') {
         section.style.display = 'block'
-    } else [
+    } else[
         section.style.display = 'none'
     ]
 }

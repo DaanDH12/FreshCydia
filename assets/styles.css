@@ -85,6 +85,7 @@ span .name {
 
 .notification.shown > .inner {
     transition: all .3s ease;
+    -webkit-transform: scale(1, 1);
     transform: scale(100%);
 }
 
@@ -94,6 +95,7 @@ span .name {
     width: 300px;
     border-radius: 15px;
     transition: all .3s ease;
+    -webkit-transform: scale(1.1, 1.1);
     transform: scale(110%);
 }
 
@@ -102,6 +104,11 @@ span .name {
     font-size: 22px;
     line-height: 18px;
     font-weight: 700;
+}
+
+.notification .content {
+    display: block;
+    padding: 0 10px;
 }
 
 .notification .actions {
