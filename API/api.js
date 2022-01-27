@@ -27,9 +27,14 @@ async function gatherData() {
     });
 
     // Popular
+    const blacklist = [
+        "Bingner/Elucubratus",
+        "Procursus"
+    ]
     let popular = await axios.get('https://api.parcility.co/db/popular')
     const popularArray = []
     popular.data.data.forEach(e => {
+        if (blacklist.includes(e.Label)) return;
         popularArray.push({
             "name": e.Label,
             "icon": e.Icon,
